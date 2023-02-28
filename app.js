@@ -1,72 +1,52 @@
-//console.log("This is linked")
-
-var secretNum = 42;
+var secretNum = Math.floor(Math.random() * 100) + 1;
 var tries = 0;
 var guesses = [];
+var guesser = getName();
 
 guess();
 
-function guess()
-{
-
-    let guessNum = prompt("Enter your guess:")
-    if(guessNum < secretNum)
-    {
-        //alert("Higher");
-        //attempts = attempts + 1;
-        attempts();
-        guesses.push(guessNum);
-        guessAgain("Higher");
-    }
-    else if(guessNum > secretNum)
-    {
-        //alert("Lower");
-        //attempts = attempts + 1;
-        attempts();
-        guesses.push(guessNum);
-        guessAgain("Lower");
-
-    }
-    else
-    {
-        //attempts = attempts + 1;
-        attempts();
-        //guesses.push(guessNum);
-        alert("Correct! It took you " + tries + " guesses." );
-    }
+function getName() {
+  return prompt("Enter your name:");
 }
 
-function attempts()
-{
-    tries += 1;
+function guess() {
+  let guessNum = prompt("Enter your guess:");
+
+  attempts();
+  guesses.push(guessNum);
+
+  if (guessNum < secretNum) {
+    guessAgain("Higher", guesser);
+  } else if (guessNum > secretNum) {
+    guessAgain("Lower", guesser);
+  } else {
+    alert("That's Correct " + guesser + "! It took you " + tries + " guesses.");
+  }
 }
 
-function guessAgain(status)
-{
-    let guessNum = prompt(status + " Guess again");
+function attempts() {
+  tries += 1;
+}
 
-    if(guessNum < secretNum)
-    {
-        //alert("Higher");
-        //attempts = attempts + 1;
-        attempts();
-        guesses.push(guessNum);
-        guessAgain("Higher");
-    }
-    else if(guessNum > secretNum)
-    {
-        //alert("Lower");
-        //attempts = attempts + 1;
-        attempts();
-        guesses.push(guessNum);
-        guessAgain("Lower");
+function guessAgain(status, name) {
+  let guessNum = prompt("Sorry, " + name + " Guess " + status);
 
-    }
-    else
-    {
-        //attempts = attempts + 1;
-        attempts();
-        //guesses.push(guessNum);
-        alert("Correct! It took you " + tries + " guesses. You're previous guesses were " + guesses + "!" );
-    }
+  attempts();
+  guesses.push(guessNum);
+
+  if (guessNum < secretNum) {
+    guessAgain("Higher", guesser);
+  } else if (guessNum > secretNum) {
+    guessAgain("Lower", guesser);
+  } else {
+    alert(
+      "That's Correct " +
+        guesser +
+        "! It took you " +
+        tries +
+        " guesses. You're previous guesses were " +
+        guesses +
+        "!"
+    );
+  }
 }
