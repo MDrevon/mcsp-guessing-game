@@ -2,6 +2,7 @@ var secretNum;
 var tries;
 var guesses;
 var guesser;
+var scores = {};
 
 newGame();
 
@@ -49,21 +50,47 @@ function guessAgain(status, name) {
   } else if (guessNum > secretNum) {
     guessAgain("Lower", guesser);
   } else {
-    alert(
-      "That's Correct " +
-        guesser +
-        "! It took you " +
-        tries +
-        " guesses. You're previous guesses were " +
-        guesses +
-        "!"
-    );
+    checkScore(scores, name);
     playAgain();
   }
 
   function playAgain() {
     if (prompt("Would you like to play again") === "Yes") {
       newGame();
+    }
+  }
+
+  function checkScore(obj, player) {
+    if (obj.hasOwnProperty(player)) {
+      if (obj[player] > tries) {
+        alert(
+          "That's Correct " +
+            name +
+            "! And you beat your previous attempt by " +
+            (obj[player] - tries) +
+            " fewer guesses!"
+        );
+        obj[player] = tries;
+      } else {
+        alert(
+          "That's Correct " +
+            name +
+            "! you did better in your last game by " +
+            (tries - obj[player]) +
+            " more guesses!"
+        );
+      }
+    } else {
+      alert(
+        "That's Correct " +
+          guesser +
+          "! It took you " +
+          tries +
+          " guesses. You're previous guesses were " +
+          guesses +
+          "!"
+      );
+      obj[player] = tries;
     }
   }
 }
