@@ -1,9 +1,18 @@
-var secretNum = Math.floor(Math.random() * 100) + 1;
-var tries = 0;
-var guesses = [];
-var guesser = getName();
+var secretNum;
+var tries;
+var guesses;
+var guesser;
 
-guess();
+newGame();
+
+function newGame() {
+  secretNum = Math.floor(Math.random() * 100) + 1;
+  tries = 0;
+  guesses = [];
+  guesser = getName();
+
+  guess();
+}
 
 function getName() {
   return prompt("Enter your name:");
@@ -21,6 +30,7 @@ function guess() {
     guessAgain("Lower", guesser);
   } else {
     alert("That's Correct " + guesser + "! It took you " + tries + " guesses.");
+    playAgain();
   }
 }
 
@@ -48,5 +58,12 @@ function guessAgain(status, name) {
         guesses +
         "!"
     );
+    playAgain();
+  }
+
+  function playAgain() {
+    if (prompt("Would you like to play again") === "Yes") {
+      newGame();
+    }
   }
 }
