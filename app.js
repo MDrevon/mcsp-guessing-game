@@ -20,7 +20,7 @@ function getName() {
 }
 
 function guess() {
-  let guessNum = prompt("Enter your guess:");
+  let guessNum = parseInt(prompt("Enter your guess:"));
 
   attempts();
   guesses.push(guessNum);
@@ -31,6 +31,7 @@ function guess() {
     guessAgain("Lower", guesser);
   } else {
     alert("That's Correct " + guesser + "! It took you " + tries + " guesses.");
+    checkScore(scores, guesser)
     playAgain();
   }
 }
@@ -40,7 +41,7 @@ function attempts() {
 }
 
 function guessAgain(status, name) {
-  let guessNum = prompt("Sorry, " + name + " Guess " + status);
+  let guessNum = parseInt(prompt("Sorry, " + name + " Guess " + status));
 
   attempts();
   guesses.push(guessNum);
@@ -50,7 +51,7 @@ function guessAgain(status, name) {
   } else if (guessNum > secretNum) {
     guessAgain("Lower", guesser);
   } else {
-    checkScore(scores, name);
+    checkScore(scores, guesser);
     playAgain();
   }
 
