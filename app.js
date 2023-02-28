@@ -31,7 +31,7 @@ function guess() {
     guessAgain("Lower", guesser);
   } else {
     alert("That's Correct " + guesser + "! It took you " + tries + " guesses.");
-    checkScore(scores, guesser)
+    checkScore(scores, guesser);
     playAgain();
   }
 }
@@ -54,44 +54,44 @@ function guessAgain(status, name) {
     checkScore(scores, guesser);
     playAgain();
   }
+}
 
-  function playAgain() {
-    if (prompt("Would you like to play again") === "Yes") {
-      newGame();
-    }
+function playAgain() {
+  if (prompt("Would you like to play again") === "Yes") {
+    newGame();
   }
+}
 
-  function checkScore(obj, player) {
-    if (obj.hasOwnProperty(player)) {
-      if (obj[player] > tries) {
-        alert(
-          "That's Correct " +
-            name +
-            "! And you beat your previous attempt by " +
-            (obj[player] - tries) +
-            " fewer guesses!"
-        );
-        obj[player] = tries;
-      } else {
-        alert(
-          "That's Correct " +
-            name +
-            "! you did better in your last game by " +
-            (tries - obj[player]) +
-            " more guesses!"
-        );
-      }
+function checkScore(obj, player) {
+  if (obj.hasOwnProperty(player)) {
+    if (obj[player] > tries) {
+      alert(
+        "That's Correct " +
+          guesser +
+          "! And you beat your previous attempt by " +
+          (obj[player] - tries) +
+          " fewer guesses!"
+      );
+      obj[player] = tries;
     } else {
       alert(
         "That's Correct " +
           guesser +
-          "! It took you " +
-          tries +
-          " guesses. You're previous guesses were " +
-          guesses +
-          "!"
+          "! you did better in your last game by " +
+          (tries - obj[player]) +
+          " more guesses!"
       );
-      obj[player] = tries;
     }
+  } else {
+    alert(
+      "That's Correct " +
+        guesser +
+        "! It took you " +
+        tries +
+        " guesses. You're previous guesses were " +
+        guesses +
+        "!"
+    );
+    obj[player] = tries;
   }
 }
