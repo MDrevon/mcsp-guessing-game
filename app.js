@@ -11,7 +11,7 @@ function newGame() {
   tries = 0;
   guesses = [];
   guesser = getName();
-
+  
   guess();
 }
 
